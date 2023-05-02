@@ -1,0 +1,87 @@
+<div class="container">
+  <div class="row">
+    <div class="card">
+        <div class="text-center">
+            <h2>Signup</h2>
+            <h4>Enter your details</h4>
+        </div>
+        <form [formGroup]="register" class="row g-2" (ngSubmit)="onSubmit()">
+          <div class="col-md-6">
+            <label for="username" class="form-label">Usename <span class="text-danger">*</span></label>
+            <input type="text" class="form-control" id="username" formControlName="username" [ngClass]="{ 'is-invalid': (form.username.touched || submitted ) && form.username.errors} ">
+            <span class="text-danger" *ngIf="(form.username.touched || submitted) && form.username.errors">
+                <span *ngIf="(form.username.touched || submitted) && form.username.errors?.required">Usename is required</span>
+                <span *ngIf="(form.username.touched || submitted) && form.username.errors?.maxlength">Username must be at least 4 characters</span>
+            </span>
+          </div>
+          <div class="col-md-6">
+            <label for="username" class="form-label">Full Name <span class="text-danger">*</span></label>
+            <input type="text" class="form-control" id="fullName" formControlName="fullName" [ngClass]="{ 'is-invalid': (form.fullName.touched || submitted ) && form.fullName.errors} ">
+            <span class="text-danger" *ngIf="(form.fullName.touched || submitted) && form.fullName.errors">
+                <span *ngIf="(form.fullName.touched || submitted) && form.fullName.errors?.required">Usename is required</span>
+            </span>
+          </div>
+          <div class="col-md-6">
+            <label for="gender">Gender <span class="text-danger">*</span></label>
+            <div class="form-group my-2">
+              <span>
+                <input type="radio" class="form-check-input" id="male" value="male" name="gender" formControlName="gender">
+                <label for="male">Male</label>
+              </span>
+              <span>
+                <input  type="radio" class="form-check-input mx-2" id="female" value="female" name="gender" formControlName="gender">
+                <label for="female">Female</label>
+              </span>
+            </div>
+            <span *ngIf="(form.gender.touched || submitted) && form.gender.errors" class="text-danger">
+              <span *ngIf="form.gender.errors.required">Gender is required.</span>
+            </span>
+          </div>
+          <!-- <div class="col-md-6">
+            <label for="email" class="form-label">Date Of Birth <span class="text-danger">*</span></label>
+            <input type="date" class="form-control" id="date" formControlName="dateOfBirth" [ngClass]="{ 'is-invalid': (form.email.touched || submitted) && form.dateOfBirth.errors}">
+            <span class="text-danger" *ngIf="(form.dateOfBirth.touched || submitted) && form.dateOfBirth.errors">
+              <span *ngIf="(form.dateOfBirth.touched || submitted) && form.dateOfBirth.errors?.required">Email is required</span>
+            </span>
+          </div> -->
+          <div class="col-md-6">
+              <label for="email" class="form-label">Email address <span class="text-danger">*</span></label>
+              <input type="email" class="form-control" id="email" formControlName="email" [ngClass]="{ 'is-invalid': (form.email.touched || submitted) && form.email.errors}">
+              <span class="text-danger" *ngIf="(form.email.touched || submitted) && form.email.errors">
+                  <span *ngIf="(form.email.touched || submitted) && form.email.errors?.required">Email is required</span>
+                  <span *ngIf="(form.email.touched || submitted) && form.email.errors?.invalidEmail">Enter a valid email address</span>
+              </span>
+          </div>
+          <div class="col-md-6">
+              <label for="password" class="form-label">Password <span class="text-danger">*</span></label>
+              <div class="input-group">
+                  <input [type]="inputType" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': (form.password.touched || submitted ) && form.password.errors}" />
+                  <div class="input-group-text">
+                    <input type="checkbox" class="form-check-input mt-0" (change)="showPassword($event)">
+                  </div>
+              </div>
+              <span class="text-danger" *ngIf="(form.password.touched || submitted) && form.password.errors">
+                  <span *ngIf="(form.password.touched || submitted) && form.password.errors?.required">Password is required</span>
+                  <span *ngIf="(form.password.touched || submitted) && form.password.errors?.invalidPassword">
+                      Password should have minimum 8 characters least 1 uppercase letter, 1 lowercase letter, 1 spesial character, and 1 number
+                  </span>
+              </span>
+          </div>
+          <div class="col-md-6">
+              <label for="password" class="form-label">Confirm Password <span class="text-danger">*</span></label>
+              <input [type]="inputType" formControlName="confirmpassword" class="form-control" [ngClass]="{ 'is-invalid': (form.confirmpassword.touched || submitted ) && form.confirmpassword.errors}" />
+              <span class="text-danger" *ngIf="(form.confirmpassword.touched || submitted) && form.confirmpassword.errors">
+                  <span *ngIf="(form.confirmpassword.touched || submitted) && form.confirmpassword.errors?.required">Confirm password is required</span>
+                  <span *ngIf="(form.confirmpassword.touched || submitted) && form.confirmpassword.errors?.passwordMismatch">Passwords doesnot match</span>
+              </span>
+          </div>
+          <div class="d-flex justify-content-lg-between position-relative mb-2">
+              <button type="submit" class="btn btn-light btn-sm rounded-pill w-25" [disabled]="form.invalid">Submit</button>
+              <small class="regular-10  position-absolute top-50 end-0 translate-middle-y">Already an account ?<span class="createaccount" role="button" routerLink="/login"> Login</span></small>
+          </div>
+          <div *ngIf="error" class="text-danger mt-3 mb-0">{{error}}</div>
+        </form>
+    </div>
+  </div>
+</div>
+

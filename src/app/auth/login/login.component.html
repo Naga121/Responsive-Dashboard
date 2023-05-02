@@ -1,0 +1,52 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="card">
+        <div class="text-center mb-2">
+          <h3>Login</h3>
+          <h6>Enter your email & password !!</h6>
+          <div *ngIf="error" class="text-danger mt-3 mb-0">{{error}}</div>
+        </div>
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+            <div class="mb-3">
+              <div class="input-group">
+                <div class="input-group-text">
+                  <i class="bi bi-envelope-at-fill"></i>
+                </div>
+                <input type="email" class="form-control" name="email" id="email" formControlName="email" placeholder="Enter your email" [ngClass]="{ 'is-invalid': (submitted || form.email.touched) && form.email.errors }">
+              </div>
+              <div *ngIf="(submitted || form.email.touched)&& form.email.errors" class="text-danger">
+                <span *ngIf="(submitted || form.email.touched) && form.email.errors?.required">Email is required</span>
+                <span *ngIf="(submitted || form.email.touched) && form.email.errors?.email">Enter a valid email address</span>
+              </div>
+            </div>
+            <div class="mb-3">
+              <div class="input-group">
+                <div class="input-group-text">
+                  <i class="bi bi-key-fill"></i>
+                </div>
+                <input [type]="inputType" formControlName="password" class="form-control" name="password" id="password" placeholder="Enter your password..." [ngClass]="{ 'is-invalid': (submitted || form.password.touched) && form.password.errors }" />
+                <div class="input-group-text">
+                  <input type="checkbox" class="form-check-input mt-0" (change)="showPassword($event)">
+                </div>
+              </div>
+              <div *ngIf="(submitted || form.password.touched)&& form.password.errors" class="text-danger">
+                <span *ngIf="(submitted || form.password.touched)&& form.password.errors?.required"> Password is required</span>
+                <span *ngIf="(submitted || form.password.touched)&& form.password.errors?.minLendth()"> Password is required</span>
+              </div>
+            </div>
+          <div class="mb-3">
+            <div class="d-flex justify-content-between position-relative mb-2">
+              <button type="submit" class="btn btn-light btn-sm rounded-pill w-25" [disabled]="loginForm.invalid">Submit</button>
+              <p class="regular-12 position-absolute top-50 end-0 translate-middle-y pl-4"><span class="createaccount" role="button" routerLink="#">Forget Password?</span></p>
+            </div>
+          </div>
+          <div class="mb-3">
+            <small class="regular-12 mt-2">Don't have account ?<span class="createaccount" role="button" routerLink="/register"> Create account</span> </small>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
